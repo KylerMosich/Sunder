@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sunder</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/opendyslexic" type="text/css"/> 
+</head>
+
+<body>
+    <div id="background">
+        <div id="page" aria-live="polite">
+            <header>
+                <div class="left"></div>
+                <div class="right"></div>
+            </header>
+
+            <section id="scene" data-scene=""></section>
+
+            <section id="inventory" hidden></section>
+
+            <section id="result" hidden></section>
+
+            <footer>
+                <div class="left">
+                    <a href="javascript:toggleFont();">Toggle OpenDyslexic</a>
+                </div>
+                <div class="right">
+                    <a href="javascript:window.location.reload();">Restart Game</a>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <div id="story-data" hidden>
+        <div id="The Gate">
+            <div>
+                <p>You are your tribe’s last hope. Your people are wracked by a disease spreading between the peoples of the area. Being a hunter, you were the last to be infected upon returning from your expedition. Thus, you are the most able of your people to go searching for the curing plant.</p>
+                <p>The trek across the scarred terrain and sundered cities is no easy task, and as if the terrain and wildlife did not menace you enough, the first symptoms of the sickness begin manifesting. Stiffened joins, shallowness of breath, and even loss of consciousness.</p>
+                <p>But finally, you have arrived at the site designated by your herbalist. There are rumours of an underground garden here, she said.</p>
+                <p>Before you - the skeleton of a ruined concrete behemoth, and a door leading underground. Stuck, unfortunately, and its metal material will prove tough to break through.</p>
+            </div>
+            <div>
+                <div data-item="Knife" class="good">
+                    <p>With a bit of ingenuity and hefty pieces of wood, you fashion yourself a ram with which to crash open the door. Splinters fly, and you are left to slip into dimly lit dungeons.</p>
+                </div>
+                <div data-item="Prybar" class="good">
+                    <p>You open your sash to get at your prybar, and soon lodge it into the crack of the doors. But it requires more force than at first thought, and takes significant effort before giving way and opening before you, leaving you to slip into dimly lit dungeons.</p>
+                </div>
+                <div data-item="Rope" class="good">
+                    <p>With your length of rope and a little scavenging through the surrounding ruins you manage to fashion an improvised pulley weighed down on your side. With the additional force of you pulling, the door cracks open, and you are left to slip into dimly lit dungeons.</p>
+                </div>
+            </div>
+        </div>
+        <div id="Withered Garden">
+            <div>
+                <p>The brown steel door refuses to open at your behest. Kick after kick slowly loosens it from its hinges, and one final bash with your shoulder leaves the entrance wide agape, and you falling forwards into it.</p>
+                <p>The walls of the room are lined by several growing trays that stretch along the length of the wall. Your heart climbs into your throat as you regard the contents. Withered thin stalks and petals scattered among the insides of the growing areas. Though you are momentarily fettered by doubt of the curing medicine’s survival, you continue on.</p>
+                <p>As you approach the exit your reflex halts your footfall. Lying on the dusty floor, squished underneath two concrete rocks is a single green stalk, with a handful of yellow and red petals. The plant is wrinkled and stiff from dehydration and age, but perhaps it could stave off your sickness for a while longer. It will not be useful for your village.</p>
+                <!-- TODO: ADD THE STALK CHOICE -->
+            </div>
+        </div>
+        <div id="Scavenger Trade">
+            <div>
+                <p>The next room is illuminated. You linger at the corner, your eyes adjusting to the source of light. A shining stone lies on the ground, casting a warm orange light onto the floor and walls. Numerous items lie on the floor in piles, but some appear to be displayed, or at least propped up near the walls. You step closer, sliding your back across the wet moss that coats the tunnels. The shadow of a silhouette skitters across the wall, and soon you make eye contact with the occupant of the room.</p>
+                <p>They are a creature covered in pale turquoise scales, their body is covered by a long, patchy coat. The coat’s tail drags along the moss and the sleeves hang from the creature’s arm. Their hands stick out through two torn holes in the sleeves. Their head is hidden by a large skull, featuring several horns many of which are adorned with dirty red ribbons. This is a Scavenger, a member of a pack of similar creatures.</p>
+                <p>They are known to be friendly to your people. Rumour implies that the friendly relations are owed to your common ancestry and similar appearance. In either case, their trade is valuable to your tribe, and many other peoples.</p>
+                <p>And this one does want to trade. They step aside to allow you towards the door, but their eyes curiously examine all of the precious things you’ve collected.</p>
+                <p>They offer you two items out of their piles, if you have high-quality goods to exchange.</p>
+                <!-- TODO: FIGURE OUT TRADE LMAO -->
+            </div>
+        </div>
+        <div id="Wild Patch">
+            <div>
+                <!-- TODO: FIGURE ENDINGS OUT --> 
+            </div>
+        </div>
+        <div id="Death">
+            <div>
+                <p>Before you are able to reach the end of the passage, a resounding cough brings you to your knees. It is accompanied by a pain that wracks you to your core, and soon runs you out of breath. The world slowly fades while you taste blood.</p>
+            </div>
+        </div>
+        <div id="Thorn Vines" class="random">
+            <div>
+                <p>The passage opens into a room crowded from ceiling to floor in thick vines. Each has the breadth of two palms and the weight to match. Red thorns protrude from the smooth green surface. The only light in the room is among these vines, originating from a titanic crack in the ceiling. Moss covers the walls, rubble, and concrete underfoot. Moisture fills your lungs as you ponder your plan.</p>
+            </div>
+            <div>
+                <div data-item="Knife" class="good">
+                    <p>With your trusted knife, you hack, cut and cleave a path to the other side.</p>
+                </div>
+                <div data-item="Synthetic Cloak" class="good">
+                    <p>You wrap the cloak tightly around yourself, and with this newfound protection you forge through the vines unharmed.</p>
+                </div>
+                <div data-item="Painkiller">
+                    <p>The painkiller numbs you to the pain of the thorns, but it does not make passage any easier, and getting to the other side requires patience besides painlessness.</p>
+                </div>
+                <div data-item="Welder Fluid">
+                    <p>You spill and light the welder fluid, and before long the blaze consumes the vines. However, the noxious fumes leave the room impassable for a while afterwards.</p>
+                </div>
+            </div>
+        </div>
+        <div id="Water Room" class="random">
+            <div>
+                <p>The passage opens into a room crowded from ceiling to floor in thick vines. Each has the breadth of two palms and the weight to match. Red thorns protrude from the smooth green surface. The only light in the room is among these vines, originating from a titanic crack in the ceiling. Moss covers the walls, rubble, and concrete underfoot. Moisture fills your lungs as you ponder your plan.</p>
+            </div>
+            <div>
+                <div data-item="Rope" class="good">
+                    <p>Your rope will be useful here. After tying it into a solid noose, after a few tries you manage to throw it up and catch it on a piece of rubble heavy enough to hold your weight. Climbing proves fairly easy.</p>
+                </div>
+                <div data-item="Pickaxe" class="good">
+                    <p>You manage to scale the wall with your half-a-pickaxe. Using it like an overweight climbing pick, you manage to get up top with clever use of the wall’s uneven features.</p>
+                </div>
+                <div data-item="Wire Coil">
+                    <p>As a rope substitute, you tie your wire into a noose and throw it up until it catches onto a piece of rubble heavy enough to hold your weight. But the wire’s lack of friction and its frailty makes for a difficult and time consuming climb.</p>
+                </div>
+                <div data-item="Metal Hook">
+                    <p>The metal hook is not the ideal climbing tool, but eventually you manage to reach the top by clever use of the uneven features of the walls.</p>
+                </div>
+            </div>
+        </div>
+        <div id="Sundered Pit" class="random">
+            <div>
+                <p>A room with collapsed walls and an enormous crevasse that splits the concrete diagonally. A scaffolding on the other side seems ready to collapse inwards. There is a way back up to this side, but not the other.</p>
+            </div>
+            <div>
+                <div data-item="Rope" class="good">
+                    <p>Your rope is useful here. You manage to get it stuck around a support of the scaffolding, and pull it down into the pit. The rubble makes it quite easy to get up.</p>
+                </div>
+                <div data-item="Metal Hook" class="good">
+                    <p>Your metal hook easily enough allows you to pull down the scaffolding into the pit. The rubble makes it quite easy to get up.</p>
+                </div>
+                <div data-item="Wire Coil">
+                    <p>With your coil of wire, you eventually manage to pull down the scaffolding and form a pile large enough to climb up, although the wire snaps several times in the process.</p>
+                </div>
+                <div data-item="Sharpened Rebar">
+                    <p>It takes many attempts before you are able to bring down the scaffolding with the piece of rebar. But surely enough, it collapses, and you climb the pile to the top.</p>
+                </div>
+            </div>
+        </div>
+        <div id="Lizard Lair" class="random">
+            <div>
+                <p>The floor of the rectangular room that opens before you is covered, almost completely, in pipes. The remnants of a walkway’s stairs leading above the pipes stand close. Many of the pipes are destroyed, burst from the inside. The walkway moans underneath your footfalls, anda creeping hiss and the scratching of claws upon metal answer. A Ruin Stalker emerges from a pipe on the far side of the room, its red armoured head first. As the full length of the creature is revealed, the numerous quills on its back twitch. It is preparing to attack.</p>
+            </div>
+            <div>
+                <div data-item="Prybar" class="good">
+                    <p>Your knife, although short, is sharp enough to pierce the lizard’s hide and scare it off, although it takes the knife with itself, stuck in its back.</p>
+                </div>
+                <div data-item="Sharpened Rebar" class="good">
+                    <p>Your sharpened rebar is an ideal tool for this. Its length allows you to keep the creature at a distance, and it is sharp enough to drive the creature away.</p>
+                </div>
+                <div data-item="Metal Hook">
+                    <p>The hook, although not ideal for the job, eventually drives the lizard away. But you are left wounded, and must afterwards spend time to tend to your newfound injuries.</p>
+                </div>
+                <div data-item="Toolkit">
+                    <p>The toolkit is heavy and made of sturdy metal. However, it is unwieldy, and by the time you drive the lizard away you are left injured and must spend some time tending to your newfound injuries.</p>
+                </div>
+            </div>
+        </div>
+        <div id="Canal Room" class="random">
+            <div>
+                <p>The passage tunnel is abruptly bifurcated by a tunnel carved into the ground. It is of a simple shape, with smooth walls and a flat floor. There is no way back up that you can see. A cursory look down either side of the tunnel reveals that its length goes well beyond your eyes’ ability to see, only slightly adapted to see in the dark as they are. There is a bridge to the other side, however it is raised on the other side and must first be lowered. There is a mechanism in the floor to the right of your side, however it seems a large amount of it is missing. There is a similar mechanism on the other side, and that one appears to be whole.</p>
+            </div>
+            <div>
+                <div data-item="Prybar" class="good">
+                    <p>Your prybar does not exactly fill the role, but with a little bit of jury-rigging, you manage to replace the lever. With a tug on it, the bridge falls into place and allows passage.</p>
+                </div>
+                <div data-item="Toolkit" class="good">
+                    <p>With your set of tools, you are able to repair the mechanism in a timely fashion. With a tug on the lever, the bridge falls back into place to allow passage.</p>
+                </div>
+                <div data-item="Hacksaw">
+                    <p>With a hacksaw, you are able to painfully slowly bite away at the support of the draw bridge. It falls into place with a loud crash, and allows passage to the other side.</p>
+                </div>
+                <div data-item="Synthetic Cloak">
+                    <p>It isn’t the ideal way to cross, and there is no easy way to climb up the other side, but your inflating cloak is able to carry you across, although in turn it hinders your efforts to get topside.</p>
+                </div>
+            </div>
+        </div>
+        <div id="Flooded Room" class="random">
+            <div>
+                <p>The next room is flooded. As soon as your ankle sinks beneath the surface, a sharp sting of electricity travels up your muscle. You pull out, and on a closer inspection, notice several long shapes circling in the still water.</p>
+            </div>
+            <div>
+                <div data-item="Knife" class="good">
+                    <p>Not an orthodox method, but you manage to drive away the creatures from your legs with a knife, sustaining little injury or pain in the process.</p>
+                </div>
+                <div data-item="Synthetic Cloak" class="good">
+                    <p>You wrap the cloak around your legs, and with such adequate protection you wad across the water with ease.</p>
+                </div>
+                <div data-item="Welder Fluid">
+                    <p>The fuel is helpful enough. You pour it out into the water, and after waiting for it to disperse and scare away the creatures, you manage to pass undisturbed, but shorter on time.</p>
+                </div>
+                <div data-item="Painkiller">
+                    <p>The painkiller injection lets you get to dry ground in short time, but once upon the other end, you find your legs badly injured, and are forced to spend some time treating the injuries.</p>
+                </div>
+            </div>
+        </div>
+        <div id="Collapsed Tunnel" class="random">
+            <div>
+                <p>Before long, you find that the passage has collapsed. Fortunately, you locate an air vent nearby, but after climbing in, discover that a small fan blocks your passage. It will need to be stopped.</p>
+            </div>
+            <div>
+                <div data-item="Prybar" class="good">
+                    <p>You carefully approach the fan, and thrust the prybar into the fan’s mounting, grinding the fan to a halt and allowing passage.</p>
+                </div>
+                <div data-item="Wire Coil" class="good">
+                    <p>The coil of wire quickly wraps and gets stuck in the fan, slowing it down with a loud screech before it stops to a dead halt, allowing passage.</p>
+                </div>
+                <div data-item="Sharpened Rebar">
+                    <p>Your sharpened rebar is too big to be stuck in the fan’s mechanism, but by placing it in the fan’s area you manage to grind it down to a halt bit by bit.</p>
+                </div>
+                <div data-item="Pickaxe">
+                    <p>The pickaxe is a little too small to easily stop the fan, but with a bit of force, and consecutive hits to the center of the fan, it falls.</p>
+                </div>
+            </div>
+        </div>
+        <div id="Metal Bars" class="random">
+            <div>
+                <p>The next door is locked away behind a set of iron bars. An iron gate stands in the middle, locked only by a chain. You highly doubt you’ll be able to find a key in these ruins, that just means you’ll have to force your way through.</p>
+            </div>
+            <div>
+                <div data-item="Prybar" class="good">
+                    <p>The prybar is, by all means, designed for this. With some back and forth pulling and pushing the door swings open violently, allowing you to forge onward.</p>
+                </div>
+                <div data-item="Hacksaw" class="good">
+                    <p>With a hacksaw, you manage to cut through the lock holding the door in a somewhat timely fashion, and you may forge onward afterwards.</p>
+                </div>
+                <div data-item="Toolkit">
+                    <p>The toolkit, although not specialized for this, comes in handy. After allowing you to loosen the door in its mounting, the heavy case is enough to bash the loosened door open, although the entire process takes some time.</p>
+                </div>
+                <div data-item="Pickaxe">
+                    <p>Strike after strike, the hinges give way and fall away under the weight of the pickaxe. By the end of the exhausting ordeal, the door gives way and allows you to forge onward.</p>
+                </div>
+                <div data-item="Painkiller">
+                    <p>You tentatively inject the painkiller, and get on to forcing the door open with your shoulders and legs. Kicking and bashing leaves you battered, but on the other side of the metal bars.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+.small-caps {
+    text-transform:uppercase;
+    font-size:70%;
+    letter-spacing:.075em
+}
+.fade-in {
+    opacity:0;
+    animation:fade-in 1s ease-out forwards
+}
+.fade-out {
+    animation:fade-in 1s ease-out reverse forwards
+}
+.skip-animation {
+    animation-delay: 0s !important
+}
+@keyframes fade-in {
+    0% {
+        opacity:0
+    } to {
+        opacity:1
+    }
+}
+#background {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    min-height: 100vh;
+    min-width: 100vw;
+    background: black;
+}
+#page {
+    flex-direction: column;
+    width: 40em;
+    max-width: calc(100vw - 2em);
+    line-height: 150%;
+    margin: 1em;
+    position: relative;
+    padding: 2.5% 5% 2.5% 5%;
+    font-family: "Georgia", serif;
+    font-size:1em; 
+    color: peru;
+    text-shadow: sienna 0.05em 0.05em 0.05em;
+    border-left: saddlebrown solid 1em;
+    background: -webkit-radial-gradient(center, ellipse cover,  #3d1d08 0%,#000000 80%);
+    background: radial-gradient(ellipse at center,  #3d1d08 0%, #000000 80%);
+}
+#page footer,
+#page header {
+    display: flex;
+    width: 100%;
+    margin: auto;
+}
+#page header {
+    border-bottom: saddlebrown solid 0.1em;
+    padding: 0 0 2.5% 0;
+}
+#page footer {
+    border-top: saddlebrown solid 0.1em;
+    padding: 2.5% 0 0 0;
+
+}
+#page footer>div,
+#page header>div {
+    flex-grow: 1;
+}
+#page footer p,
+#page header p {
+    margin: .5em 0 0;
+}
+#page footer .right,
+#page header .right {
+  text-align: right
+}
+#page a {
+    color: burlywood;
+    -webkit-text-decoration-color:hsla(0, 73.83966244725738%, 53.529411764705884%, 1);
+    text-decoration-color:hsla(0, 73.83966244725738%, 53.529411764705884%, 1);
+}
+#page a:hover,
+#page a:active {
+    background-color:hsla(0, 100%, 98.03921568627452%, .9);
+    color:hsla(0, 73.83966244725738%, 53.529411764705884%, 1);
+}
+#scene {
+    position: relative;
+    align-items: start;
+    -webkit-text-decoration-color:hsla(0, 73.83966244725738%, 53.529411764705884%, 1);
+    text-decoration-color:hsla(0, 73.83966244725738%, 53.529411764705884%, 1);
+    border-bottom: saddlebrown solid 0.1em;
+}
+input[type=text],
+select {
+    padding:.25em;
+}
+@media screen and (max-width:768px) {
+    #page {
+        margin: 0;
+        width: 100vw;
+        max-width: 100vw;
+        min-height: 100vh;
+        padding: 1em;
+    }
+}
