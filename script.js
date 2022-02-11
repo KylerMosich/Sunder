@@ -20,6 +20,21 @@ printScene("The Gate", true);
 console.log("Init completed.");
 
 /**
+ * Updates the innerHTML of element with the given HTML, applying a fade-in.
+ * @param {HTMLElement} element - The element to be updated.
+ * @param {string} innerHTML - The new contents of the element.
+ */
+function updateHTML(element, innerHTML) {
+    // Reset the animation class so that it plays again.
+    element.classList.remove("fade-in");
+    element.offsetWidth;
+    element.classList.add("fade-in");
+
+    // Update HTML.
+    element.innerHTML = innerHTML;
+}
+
+/**
  * Rewrites the page header with the current scene and time remaining.
  */
 function updateHeader() {
@@ -42,7 +57,7 @@ function printScene(sceneId, includeItems) {
     document.getElementById("result").hidden = true;
 
     let scene = document.getElementById("scene");
-    scene.innerHTML = document.getElementById(sceneId).firstElementChild.innerHTML;
+    updateHTML(scene, document.getElementById(sceneId).firstElementChild.innerHTML);
     scene.setAttribute("data-scene", sceneId);
 
     embedInventory(includeItems);
@@ -58,6 +73,7 @@ function embedInventory(show) {
 
     // Clear existing contents.
     element = document.getElementById("inventory");
+    updateHTML(element, element.innerHTML);
     element.innerHTML = "";
 
     // Hide inventory if it is not meant to show.
@@ -174,12 +190,14 @@ function embedResult(item) {
 
     // Add continue button to result and set the HTML.
     resultHTML += "<p><a id=\"continue\" href=\"javascript:void(0)\">Next</a></p>"
-    document.getElementById("result").innerHTML = resultHTML;
+
+    let result = document.getElementById("result")
+    updateHTML(result, resultHTML);
 
     // Make the continue button functional.
     document.getElementById("continue").addEventListener("click", selectScene);
-
-    document.getElementById("result").hidden = false;
+    
+    result.hidden = false;
     document.getElementById("inventory").hidden = true;
     updateHeader();
 }
@@ -209,10 +227,9 @@ function selectScene() {
 
 function toggleFont() {
     let page = document.getElementById("page");
-    if (page.style.fontFamily == '"Georgia", serif') {
-        page.style.fontFamily = '"OpenDyslexic3Regular", serif';
-    }
-    else {
+    if (page.style.fontFamily == '"OpenDyslexic3Regular", serif') {
         page.style.fontFamily = '"Georgia", serif';
+    } else {
+        page.style.fontFamily = '"OpenDyslexic3Regular", serif';
     }
 }
