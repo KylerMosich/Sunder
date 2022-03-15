@@ -9,6 +9,11 @@
 </head>
 
 <body>
+    <!-- Load JS files or alert to JS being disabled. -->
+    <script type="text/javascript" src="script.js" defer=true></script>
+    <noscript>You must enable JavaScript in order to play Sunder.</noscript>
+
+    <!-- Visible page skeleton. -->
     <div id="background">
         <div id="page" aria-live="polite" class="fade-in">
             <header>
@@ -33,7 +38,9 @@
         </div>
     </div>
 
+    <!-- Hidden room data. -->
     <div id="story-data" hidden>
+        <!-- Special rooms. -->
         <div id="The Gate">
             <div>
                 <p>You are your tribe’s last hope. Your people are wracked by a disease spreading between the peoples of the area. Being a hunter, you were the last to be infected upon returning from your expedition. Thus, you are the most able of your people to go searching for the curing plant.</p>
@@ -57,10 +64,11 @@
             <div>
                 <p>The brown steel door refuses to open at your behest. Kick after kick slowly loosens it from its hinges, and one final bash with your shoulder leaves the entrance wide agape, and you falling forwards into it.</p>
                 <p>The walls of the room are lined by several growing trays that stretch along the length of the wall. Your heart climbs into your throat as you regard the contents. Withered thin stalks and petals scattered among the insides of the growing areas. Though you are momentarily fettered by doubt of the curing medicine’s survival, you continue on.</p>
-                <p>As you approach the exit your reflex halts your footfall. Lying on the dusty floor, squished underneath two concrete rocks is a single green stalk, with a handful of yellow and red petals. The plant is wrinkled and stiff from dehydration and age, but perhaps it could stave off your sickness for a while longer. It will not be useful for your village.</p>
-                <a href="javascript:void(0)">Take the stalk.</a> <p>You consume the remains of the flower in the hopes of extending your time here. You forge on, feeling laden with guilt but freed of the numbing influence of the rot.</p>
-			    <a>Leave it.</a> <p>In a surge of panache, you discard the remains of the plant, and continue on your journey with a sprightly step.</p>
-                <!-- TODO: ADD THE STALK CHOICE -->
+                <p>As you approach the exit your reflex halts your footfall. Lying on the dusty floor, squished underneath two concrete rocks is a single green stalk, with a handful of yellow and red petals. The plant is wrinkled and stiff from dehydration and age, but after a short time to prepare it, it could stave off your sickness for a while longer. It will not be useful for your village.</p>
+            </div>
+            <div class="override">
+                <p><a href="javascript:takeStalk(true)">Take the stalk.</a></p>
+                <p><a href="javascript:takeStalk(false)">Leave it.</a></p>
             </div>
         </div>
         <div id="Scavenger Trade">
@@ -70,7 +78,11 @@
                 <p>They are known to be friendly to your people. Rumour implies that the friendly relations are owed to your common ancestry and similar appearance. In either case, their trade is valuable to your tribe, and many other peoples.</p>
                 <p>And this one does want to trade. They step aside to allow you towards the door, but their eyes curiously examine all of the precious things you’ve collected.</p>
                 <p>They offer you two items out of their piles, if you have high-quality goods to exchange.</p>
-                <!-- TODO: FIGURE OUT TRADE LMAO -->
+            </div>
+            <!-- TODO: FIGURE OUT TRADE LMAO -->
+            <div class="override">
+                <!-- <p><a href="javascript:takeStalk(true)">Take the stalk.</a></p>
+                <p><a href="javascript:takeStalk(false)">Leave it.</a></p> -->
             </div>
         </div>
         <div id="Wild Patch">
@@ -83,6 +95,7 @@
                 <p>Before you are able to reach the end of the passage, a resounding cough brings you to your knees. It is accompanied by a pain that wracks you to your core, and soon runs you out of breath. The world slowly fades while you taste blood.</p>
             </div>
         </div>
+        <!-- Random rooms. -->
         <div id="Thorn Vines" class="random">
             <div>
                 <p>The passage opens into a room crowded from ceiling to floor in thick vines. Each has the breadth of two palms and the weight to match. Red thorns protrude from the smooth green surface. The only light in the room is among these vines, originating from a titanic crack in the ceiling. Moss covers the walls, rubble, and concrete underfoot. Moisture fills your lungs as you ponder your plan.</p>
@@ -239,7 +252,5 @@
             </div>
         </div>
     </div>
-    
-    <script type="text/javascript" src="script.js"></script>
 </body>
 </html>

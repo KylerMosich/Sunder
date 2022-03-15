@@ -1,13 +1,13 @@
 // Constants
-const BOOST_TIME = 30; // Amount of extra time rewarded at the middle scene.
-const CUTOFF = 20; // Amount of time remaining required for the good ending.
+const BOOST_TIME = 35; // Amount of extra time rewarded at the middle scene.
 const GOOD_TIME = 5; // Amount of time lost from good solutions.
 const OKAY_TIME = 10; // Amount of time lost from okay solutions.
 const BAD_TIME = 15; // Amount of time lost from bad solutions.
 
 // Starting vars
 let roomsVisited = 0;
-let timeRemaining = 30;
+let timeRemaining = 300; // Amount of time remaining before death.
+let villageTimeRequired = -10; // Amount of time remaining required for the good ending.
 let items = {
     "Knife": "Made of good metal. Used for stabbing and cutting, usually.",
     "Prybar": "Scavenged metal tool, able to open things meant to stay closed.",
@@ -60,27 +60,24 @@ function printScene(sceneId, includeItems) {
     updateHTML(scene, document.getElementById(sceneId).firstElementChild.innerHTML);
     scene.setAttribute("data-scene", sceneId);
 
-    embedInventory(includeItems);
+    // Embed inventory if included or its override.
+    if (includeItems) {
+        embedInventory();
+    } else {
+        embedInventoryOverride(document.getElementById(sceneId).lastElementChild.innerHTML);
+    }
     updateHeader();
 }
 
 /**
  * Embeds the current player inventory after the scene.
- * @param {boolean} show If true, the inventory will be shown. Otherwise, it will be hidden.
  */
-function embedInventory(show) {
-    console.log("Embedding Inventory. Showing: " + show);
+function embedInventory() {
+    console.log("Embedding inventory.");
 
     // Clear existing contents.
     element = document.getElementById("inventory");
-    updateHTML(element, element.innerHTML);
-    element.innerHTML = "";
-
-    // Hide inventory if it is not meant to show.
-    if (!show) {
-        element.hidden = true;
-        return undefined;
-    }
+    updateHTML(element, "");
 
     // Add <p> tag for the inventory intro.
     let child = document.createElement("P");
@@ -103,6 +100,20 @@ function embedInventory(show) {
         // Make the item button functional.
         link.addEventListener("click", function(){embedResult(key)});
     }
+
+    element.hidden = false;
+}
+
+/**
+ * Embeds the override content into the inventory instead of the items.
+ * @param {string} override HTML to place in the inventory.
+ */
+function embedInventoryOverride(override) {
+    console.log("Embedding inventory with override.");
+
+    // Replace existing contents.
+    element = document.getElementById("inventory");
+    updateHTML(element, override);
 
     element.hidden = false;
 }
@@ -209,7 +220,7 @@ function selectScene() {
     // Select fixed rooms where they belong, or select and remove random room from pool.
     if (timeRemaining <= 0) {
         selection = "Death";
-    } else if (roomsVisited === 2) {
+    } else if (roomsVisited === 0) {
         selection = "Withered Garden";
     } else if (roomsVisited === 5) {
         selection = "Wild Patch";
@@ -232,4 +243,31 @@ function toggleFont() {
     } else {
         page.style.fontFamily = '"OpenDyslexic3Regular", serif';
     }
+}
+
+///// Room-specific functions /////
+function takeStalk(take) {
+    let resultHTML = "";
+
+    // Change the time if stalk eaten and set result.
+    if (take) {
+        timeRemaining += BOOST_TIME - 5;
+        villageTimeRequired += BOOST_TIME;
+
+        resultHTML = "<p>After a few minutes of preparation, you consume the remains of the flower in the hopes of extending your time here. You forge on, feeling laden with guilt but freed of the numbing influence of the rot.</p>";
+    } else {
+        resultHTML = "<p>In a surge of panache, you discard the remains of the plant, and continue on your journey with a sprightly step.</p>";
+    }
+    
+    // Add continue button to result and set the HTML.
+    resultHTML += "<p><a id=\"continue\" href=\"javascript:void(0)\">Next</a></p>";
+    updateHTML(document.getElementById("result"), resultHTML);
+
+    document.getElementById("result").hidden = false;
+    document.getElementById("inventory").hidden = true;
+
+    updateHeader();
+
+    // Make the continue button functional.
+    document.getElementById("continue").addEventListener("click", function() { printScene("Scavenger Trade", false); } );
 }
