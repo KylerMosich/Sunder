@@ -64,7 +64,7 @@ function printScene(sceneId, includeItems) {
     if (includeItems) {
         embedInventory();
     } else {
-        embedInventoryOverride(document.getElementById(sceneId).lastElementChild.innerHTML);
+        embedInventoryOverride(document.getElementById(sceneId).querySelector(".override").innerHTML);
     }
     updateHeader();
 }
@@ -247,7 +247,7 @@ function toggleFont() {
 
 ///// Room-specific functions /////
 function takeStalk(take) {
-    let resultHTML = "";
+    let resultHTML;
 
     // Change the time if stalk eaten and set result.
     if (take) {
@@ -270,4 +270,19 @@ function takeStalk(take) {
 
     // Make the continue button functional.
     document.getElementById("continue").addEventListener("click", function() { printScene("Scavenger Trade", false); } );
+}
+
+function toggleTrade(flipped) {
+    let resultHTML;
+    if (flipped) {
+        resultHTML = document.getElementById("Toggled Trade").innerHTML;
+    } else {
+        resultHTML = document.getElementById("Scavenger Trade").querySelector(".override").innerHTML;
+    }
+    updateHTML(document.getElementById("inventory"), resultHTML);
+    // <option value="volvo">Volvo</option>
+}
+
+function trade() {
+
 }

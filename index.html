@@ -81,8 +81,40 @@
             </div>
             <!-- TODO: FIGURE OUT TRADE LMAO -->
             <div class="override">
-                <!-- <p><a href="javascript:takeStalk(true)">Take the stalk.</a></p>
-                <p><a href="javascript:takeStalk(false)">Leave it.</a></p> -->
+                <br>
+                    <label for="Quality Item">Choose a high-quality item to give.</label><br/>
+                    <select name="Quality Item" id="Quality Item" required>
+                      
+                    </select><br/>
+                    <label for="Cheap Item 1">Choose two cheap items to receive.</label><br/>
+                    <select name="Cheap Item 1" id="Cheap Item 1" required>
+                      
+                    </select><br/>
+                    <select name="Cheap Item 2" id="Cheap Item 2" required>
+                      
+                    </select>                    
+                </form>
+
+                <p><a href="javascript:toggleTrade(true)">Trade cheap items for a high-quality item instead.</a></p>
+                <p><a href="javascript:trade()">Agree to trade.</a></p>
+            </div>
+            <div id="Toggled Trade">
+                <form>
+                    <label for="Cheap Item 1">Choose two cheap items to give.</label><br/>
+                    <select name="Cheap Item 1" id="Cheap Item 1" required>
+                      
+                    </select><br/>
+                    <select name="Cheap Item 2" id="Cheap Item 2" required>
+                      
+                    </select><br/>
+                    <label for="Quality Item">Choose a high-quality item to receive.</label><br/>
+                    <select name="Quality Item" id="Quality Item" required>
+                      
+                    </select>                  
+                </form>
+
+                <p><a href="javascript:toggleTrade(false)">Trade a high-quality item for cheap items instead.</a></p>
+                <p><a href="javascript:trade()">Agree to trade.</a></p>
             </div>
         </div>
         <div id="Wild Patch">
