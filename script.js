@@ -23,7 +23,7 @@ const CHEAP_ITEMS = {
 
 // Starting vars
 let roomsVisited = 0;
-let timeRemaining = 300; // Amount of time remaining before death. // TODO: Make 30.
+let timeRemaining = 30; // Amount of time remaining before death.
 let villageTimeRequired = -10; // Amount of time remaining required for the good ending.
 let items = JSON.parse(JSON.stringify(QUALITY_ITEMS));
 let roomPool = Array.from(document.getElementsByClassName("random")); // Rooms that can be randomly chosen.
@@ -213,7 +213,7 @@ function embedResult(item) {
     }
 
     // Add continue button to result and set the HTML.
-    resultHTML += "<p><a id=\"continue\" href=\"javascript:void(0)\">Next</a></p>"
+    resultHTML += "<p><a id=\"continue\" href=\"javascript:void(0)\">Next</a></p>";
 
     let result = document.getElementById("result")
     updateHTML(result, resultHTML);
@@ -233,10 +233,10 @@ function selectScene() {
     // Select fixed rooms where they belong, or select and remove random room from pool.
     if (timeRemaining <= 0) {
         selection = "Death";
-    } else if (roomsVisited === 2) { // TODO: Make 2.
+    } else if (roomsVisited === 2) {
         selection = "Withered Garden";
     } else if (roomsVisited === 5) {
-        selectEnding();
+        wildPatch();
         return;
     } else {
         let rand = Math.floor(Math.random() * roomPool.length);
@@ -258,7 +258,10 @@ function toggleFont() {
     }
 }
 
-///// Room-specific functions /////
+///////////////////////////////////////////////////////
+/////////////// Room-specific functions ///////////////
+///////////////////////////////////////////////////////
+
 function takeStalk(take) {
     let resultHTML;
 
@@ -350,7 +353,7 @@ function toggleTrade(flipped) {
 
     // Add continue button to result and set the HTML.
     let resultHTML = interface.innerHTML;
-    resultHTML += "<p><a id=\"continue\" href=\"javascript:void(0)\">Continue without trading.</a></p>"
+    resultHTML += "<p><a id=\"continue\" href=\"javascript:void(0)\">Continue without trading.</a></p>";
     updateHTML(document.getElementById("inventory"), resultHTML);
 
     // Make the continue button functional.
@@ -399,4 +402,42 @@ function trade() {
     }
 
     selectScene();
+}
+
+function wildPatch() {
+    let scene = document.getElementById("scene");
+    let goodEnd = timeRemaining > villageTimeRequired; // Check for good or bad ending.
+    let resultHTML = document.getElementById("Wild Patch").firstElementChild.innerHTML; // Start with universal ending text.
+
+    // Update display.
+    document.getElementById("result").hidden = true;
+    scene.setAttribute("data-scene", "Wild Patch");
+    updateHeader();
+
+    // Embed correct ending.
+    if (goodEnd) {
+        // Set good ending text.
+        resultHTML += document.getElementById("Good End").innerHTML;
+        updateHTML(scene, resultHTML);
+    
+        // Make the continue button functional.
+        document.getElementById("continue").addEventListener("click", function() {printEpilogue("Good Epilogue")});
+    } else {
+        // Set bad ending text.
+        resultHTML += document.getElementById("Bad End").innerHTML;
+        updateHTML(scene, resultHTML);
+
+        // Make choice buttons functional.
+        document.getElementById("die").addEventListener("click", function() {printEpilogue("Die Epilogue")});
+        document.getElementById("consume").addEventListener("click", function() {printEpilogue("Consume Epilogue")});
+    }
+}
+
+function printEpilogue(epilogueId) {
+    // Update Header.
+    scene.setAttribute("data-scene", "End");
+    updateHeader();
+
+    // Update contents.
+    updateHTML(scene, document.getElementById(epilogueId).innerHTML);
 }
