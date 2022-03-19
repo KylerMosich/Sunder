@@ -4,15 +4,28 @@ const GOOD_TIME = 5; // Amount of time lost from good solutions.
 const OKAY_TIME = 10; // Amount of time lost from okay solutions.
 const BAD_TIME = 15; // Amount of time lost from bad solutions.
 
-// Starting vars
-let roomsVisited = 0;
-let timeRemaining = 300; // Amount of time remaining before death.
-let villageTimeRequired = -10; // Amount of time remaining required for the good ending.
-let items = {
+const QUALITY_ITEMS = {
     "Knife": "Made of good metal. Used for stabbing and cutting, usually.",
     "Prybar": "Scavenged metal tool, able to open things meant to stay closed.",
     "Rope": "A length of hand-crafted linen rope from your tribe."
 };
+const CHEAP_ITEMS = {
+    "Pickaxe": "Old, rusted, and the wood is wet, but it’s still able to serve.",
+    "Sharpened Rebar": "A metal rebar once used for construction, sharpened into a long, fine spike.",
+    "Painkiller": "A glass cylinder with a fine metal spike and a pump. Probably very old, but it may still numb your pains.",
+    "Synthetic Cloak": "A plastic cloak. You can wrap it around yourself and blow into a plastic pipe to inflate it.",
+    "Toolkit": "A set of old tools, held in an equally old, heavy, metal toolbox.",
+    "Metal Hook": "A menacing hook on a long pole.",
+    "Hacksaw": "A set of old tools, held in an equally old, heavy, metal toolbox.",
+    "Welder Fluid": "A metal pre-Sundering cylinder, full of fuel used in industrial welders.",
+    "Wire Coil": "A coil of electrical wire. Or so you think, the people tell tales of such devices being in use pre-Sundering."
+};
+
+// Starting vars
+let roomsVisited = 0;
+let timeRemaining = 300; // Amount of time remaining before death. // TODO: Make 30.
+let villageTimeRequired = -10; // Amount of time remaining required for the good ending.
+let items = JSON.parse(JSON.stringify(QUALITY_ITEMS));
 let roomPool = Array.from(document.getElementsByClassName("random")); // Rooms that can be randomly chosen.
 
 // Initialize HTML
@@ -160,39 +173,39 @@ function embedResult(item) {
     // Reward item based on scene.
     switch (scene.id) {
         case "The Gate":
-            items["Pickaxe"] = "Old, rusted, and the wood is wet, but it’s still able to serve.";
+            items["Pickaxe"] = CHEAP_ITEMS["Pickaxe"];
             resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
             break;
         case "Thorn Vines":
-            items["Sharpened Rebar"] = "A metal rebar once used for construction, sharpened into a long, fine spike.";
+            items["Sharpened Rebar"] = CHEAP_ITEMS["Sharpened Rebar"];
             resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
             break;
         case "Water Room":
-            items["Painkiller"] = "A glass cylinder with a fine metal spike and a pump. Probably very old, but it may still numb your pains.";
+            items["Painkiller"] = CHEAP_ITEMS["Painkiller"];
             resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
             break;
         case "Sundered Pit":
-            items["Synthetic Cloak"] = "A plastic cloak, you can wrap it around yourself and blow into a plastic pipe to inflate it.";
+            items["Synthetic Cloak"] = CHEAP_ITEMS["Synthetic Cloak"];
             resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
             break;
         case "Lizard Lair":
-            items["Wire Coil"] = "A coil of electrical wire. Or so you think, the people tell tales of such devices being in use pre-Sundering.";
+            items["Wire Coil"] = CHEAP_ITEMS["Wire Coil"];
             resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
             break;
         case "Canal Room":
-            items["Metal Hook"] = "A menacing hook on a long pole.";
+            items["Metal Hook"] = CHEAP_ITEMS["Metal Hook"];
             resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
             break;
         case "Flooded Room":
-            items["Hacksaw"] = "Saw with teeth, meant for cutting teeth.";
+            items["Hacksaw"] = CHEAP_ITEMS["Hacksaw"];
             resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
             break;
         case "Collapsed Tunnel":
-            items["Welder Fluid"] = "A meta pre-Sundering cylinder, full of fuel used in industrial welders.";
+            items["Welder Fluid"] = CHEAP_ITEMS["Welder Fluid"];
             resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
             break;
         case "Metal Bars":
-            items["Toolkit"] = "A set of old tools, held in an equally old, heavy, metal toolbox.";
+            items["Toolkit"] = CHEAP_ITEMS["Toolkit"];
             resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
             break;
         default:
@@ -220,20 +233,20 @@ function selectScene() {
     // Select fixed rooms where they belong, or select and remove random room from pool.
     if (timeRemaining <= 0) {
         selection = "Death";
-    } else if (roomsVisited === 0) {
+    } else if (roomsVisited === 2) { // TODO: Make 2.
         selection = "Withered Garden";
     } else if (roomsVisited === 5) {
-        selection = "Wild Patch";
+        selectEnding();
+        return;
     } else {
         let rand = Math.floor(Math.random() * roomPool.length);
         selection = roomPool.splice(rand, 1)[0].id;
         showItems = true;
-
-        roomsVisited++;
     }
 
     // Print the selected scene.
     printScene(selection, showItems);
+    roomsVisited++;
 }
 
 function toggleFont() {
@@ -269,20 +282,121 @@ function takeStalk(take) {
     updateHeader();
 
     // Make the continue button functional.
-    document.getElementById("continue").addEventListener("click", function() { printScene("Scavenger Trade", false); } );
+    document.getElementById("continue").addEventListener("click", function() { printScene("Scavenger Trade", false); toggleTrade(false);} );
 }
 
 function toggleTrade(flipped) {
-    let resultHTML;
+    // Embed correct trade interface.
+    let interface;
     if (flipped) {
-        resultHTML = document.getElementById("Toggled Trade").innerHTML;
+        interface = document.getElementById("Toggled Trade");
     } else {
-        resultHTML = document.getElementById("Scavenger Trade").querySelector(".override").innerHTML;
+        interface = document.getElementById("Trade");
     }
+
+    // Get dropdowns.
+    let quality = interface.querySelector("#QualityItem");
+    let cheap1 = interface.querySelector("#CheapItem1");
+    let cheap2 = interface.querySelector("#CheapItem2");
+
+    // Populate dropdowns with correct items.
+    if (flipped) {
+        // Populate cheap items the player has.
+        Object.keys(CHEAP_ITEMS).forEach(item => {
+            if (item in items) {
+                let option = document.createElement("option");
+                option.setAttribute("value", item);
+                option.textContent = item;
+
+                cheap1.appendChild(option);
+                cheap2.appendChild(option.cloneNode(true));
+            }
+        });
+        
+        // Populate quality items the player does not have.
+        Object.keys(QUALITY_ITEMS).forEach(item => {
+            if (!(item in items)) {
+                let option = document.createElement("option");
+                option.setAttribute("value", item);
+                option.textContent = item;
+
+                quality.appendChild(option);
+            }
+        });
+    } else {
+        // Populate quality items the player has.
+        Object.keys(QUALITY_ITEMS).forEach(item => {
+            if (item in items) {
+                let option = document.createElement("option");
+                option.setAttribute("value", item);
+                option.textContent = item;
+
+                quality.appendChild(option);
+            }
+        });
+
+        // Populate cheap items the player does not have.
+        Object.keys(CHEAP_ITEMS).forEach(item => {
+            if (!(item in items)) {
+                let option = document.createElement("option");
+                option.setAttribute("value", item);
+                option.textContent = item;
+
+                cheap1.appendChild(option);
+                cheap2.appendChild(option.cloneNode(true));
+            }
+        });
+    }
+
+    // Add continue button to result and set the HTML.
+    let resultHTML = interface.innerHTML;
+    resultHTML += "<p><a id=\"continue\" href=\"javascript:void(0)\">Continue without trading.</a></p>"
     updateHTML(document.getElementById("inventory"), resultHTML);
-    // <option value="volvo">Volvo</option>
+
+    // Make the continue button functional.
+    document.getElementById("continue").addEventListener("click", selectScene);
+}
+
+function disableItem(dropdown, item) {
+    // Get dropdown to disable item in.
+    let otherDropdown;
+    if (dropdown.id === "CheapItem1") {
+        otherDropdown = dropdown.parentElement.querySelector("#CheapItem2");
+    } else if (dropdown.id === "CheapItem2") {
+        otherDropdown = dropdown.parentElement.querySelector("#CheapItem1");
+    }
+
+    // Disable item and enable other items.
+    Array.from(otherDropdown.children).forEach(child => {
+        if (child.getAttribute("value") === item) {
+            child.setAttributeNode(document.createAttribute("disabled"));
+        } else if (child.hasAttribute("disabled") && !child.hasAttribute("hidden")) {
+            child.removeAttribute("disabled");
+        }
+    })
 }
 
 function trade() {
+    // Get selected items.
+    let interface = document.getElementById("inventory");
+    let quality = interface.querySelector("#QualityItem").value;
+    let cheap1 = interface.querySelector("#CheapItem1").value;
+    let cheap2 = interface.querySelector("#CheapItem2").value;
 
+    // Check if trade is toggled or not.
+    let toggled = false;
+    if (interface.firstElementChild.id == "Toggled Trade Form") toggled = true;
+
+    // Add/remove items as per trade.
+    if (toggled) {
+        items[quality] = QUALITY_ITEMS[quality];
+        delete items[cheap1];
+        delete items[cheap2];
+    } else {
+        delete items[quality];
+        items[cheap1] = CHEAP_ITEMS[cheap1];
+        items[cheap2] = CHEAP_ITEMS[cheap2];
+    }
+
+    selectScene();
 }

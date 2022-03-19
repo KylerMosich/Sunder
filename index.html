@@ -10,7 +10,7 @@
 
 <body>
     <!-- Load JS files or alert to JS being disabled. -->
-    <script type="text/javascript" src="script.js" defer=true></script>
+    <script type="text/javascript" src="script.js" defer></script>
     <noscript>You must enable JavaScript in order to play Sunder.</noscript>
 
     <!-- Visible page skeleton. -->
@@ -79,37 +79,38 @@
                 <p>And this one does want to trade. They step aside to allow you towards the door, but their eyes curiously examine all of the precious things you’ve collected.</p>
                 <p>They offer you two items out of their piles, if you have high-quality goods to exchange.</p>
             </div>
-            <!-- TODO: FIGURE OUT TRADE LMAO -->
             <div class="override">
-                <br>
-                    <label for="Quality Item">Choose a high-quality item to give.</label><br/>
-                    <select name="Quality Item" id="Quality Item" required>
-                      
+            </div>
+            <div id="Trade">
+                <form id="Trade Form">
+                    <label for="QualityItem">Choose a high-quality item to give.</label><br/>
+                    <select name="QualityItem" id="QualityItem" required>
+                        <option selected disabled hidden></option>
                     </select><br/>
-                    <label for="Cheap Item 1">Choose two cheap items to receive.</label><br/>
-                    <select name="Cheap Item 1" id="Cheap Item 1" required>
-                      
+                    <label for="CheapItem1">Choose two cheap items to receive.</label><br/>
+                    <select name="CheapItem1" id="CheapItem1" onchange="disableItem(this, this.value)" required>
+                        <option selected disabled hidden></option>
                     </select><br/>
-                    <select name="Cheap Item 2" id="Cheap Item 2" required>
-                      
-                    </select>                    
+                    <select name="CheapItem2" id="CheapItem2" onchange="disableItem(this, this.value)" required>
+                        <option selected disabled hidden></option>
+                    </select>
                 </form>
 
                 <p><a href="javascript:toggleTrade(true)">Trade cheap items for a high-quality item instead.</a></p>
                 <p><a href="javascript:trade()">Agree to trade.</a></p>
             </div>
             <div id="Toggled Trade">
-                <form>
-                    <label for="Cheap Item 1">Choose two cheap items to give.</label><br/>
-                    <select name="Cheap Item 1" id="Cheap Item 1" required>
-                      
+                <form id="Toggled Trade Form">
+                    <label for="CheapItem1">Choose two cheap items to give.</label><br/>
+                    <select name="CheapItem1" id="CheapItem1" onchange="disableItem(this, this.value)" required>
+                        <option selected disabled hidden></option>
                     </select><br/>
-                    <select name="Cheap Item 2" id="Cheap Item 2" required>
-                      
+                    <select name="CheapItem2" id="CheapItem2" onchange="disableItem(this, this.value)" required>
+                        <option selected disabled hidden></option>
                     </select><br/>
-                    <label for="Quality Item">Choose a high-quality item to receive.</label><br/>
-                    <select name="Quality Item" id="Quality Item" required>
-                      
+                    <label for="QualityItem">Choose a high-quality item to receive.</label><br/>
+                    <select name="QualityItem" id="QualityItem" required>
+                        <option selected disabled hidden></option>
                     </select>                  
                 </form>
 
