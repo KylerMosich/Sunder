@@ -16,7 +16,7 @@ const CHEAP_ITEMS = {
     "Synthetic Cloak": "A plastic cloak. You can wrap it around yourself and blow into a plastic pipe to inflate it.",
     "Toolkit": "A set of old tools, held in an equally old, heavy, metal toolbox.",
     "Metal Hook": "A menacing hook on a long pole.",
-    "Hacksaw": "A set of old tools, held in an equally old, heavy, metal toolbox.",
+    "Hacksaw": "Saw with teeth, meant for cutting teeth.",
     "Welder Fluid": "A metal pre-Sundering cylinder, full of fuel used in industrial welders.",
     "Wire Coil": "A coil of electrical wire. Or so you think, the people tell tales of such devices being in use pre-Sundering."
 };
@@ -251,7 +251,7 @@ function selectScene() {
 
 function toggleFont() {
     let page = document.getElementById("page");
-    if (page.style.fontFamily == '"OpenDyslexic3Regular", serif') {
+    if (page.style.fontFamily === '"OpenDyslexic3Regular", serif') {
         page.style.fontFamily = '"Georgia", serif';
     } else {
         page.style.fontFamily = '"OpenDyslexic3Regular", serif';
@@ -376,7 +376,7 @@ function disableItem(dropdown, item) {
         } else if (child.hasAttribute("disabled") && !child.hasAttribute("hidden")) {
             child.removeAttribute("disabled");
         }
-    })
+    });
 }
 
 function trade() {
@@ -386,9 +386,12 @@ function trade() {
     let cheap1 = interface.querySelector("#CheapItem1").value;
     let cheap2 = interface.querySelector("#CheapItem2").value;
 
+    // If not all dropdowns are filled, abort.
+    if (quality === "" || cheap1 === "" || cheap2 === "") return;
+
     // Check if trade is toggled or not.
     let toggled = false;
-    if (interface.firstElementChild.id == "Toggled Trade Form") toggled = true;
+    if (interface.firstElementChild.id === "Toggled Trade Form") toggled = true;
 
     // Add/remove items as per trade.
     if (toggled) {
@@ -401,7 +404,15 @@ function trade() {
         items[cheap2] = CHEAP_ITEMS[cheap2];
     }
 
-    selectScene();
+    // Print result.
+    let scene = document.getElementById("scene");
+    let resultHTML = document.getElementById("Trade Accept").innerHTML;
+    updateHTML(scene, resultHTML);
+
+    document.getElementById("inventory").hidden = true;
+    
+    // Make the continue button functional.
+    document.getElementById("continue").addEventListener("click", selectScene);
 }
 
 function wildPatch() {
