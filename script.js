@@ -174,39 +174,39 @@ function embedResult(item) {
     switch (scene.id) {
         case "The Gate":
             items["Pickaxe"] = CHEAP_ITEMS["Pickaxe"];
-            resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
+            resultHTML += "<p>Once inside, it becomes quite apparent the inside of the hatch is severely damaged. In the light coming from the outside you find half of a pickaxe, rusted. The wood is wet and brittle, but the tool may still be able to serve.</p>"
             break;
         case "Thorn Vines":
             items["Sharpened Rebar"] = CHEAP_ITEMS["Sharpened Rebar"];
-            resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
+            resultHTML += "<p>A surge of pain in your foot precedes the clattering of metal on concrete. After fumbling for a little while in the dark you hold a long piece of metal, its metal twisting endlessly and coming to a menacing point. A piece of rebar fashioned into a spear, a tedious task no doubt.</p>"
             break;
         case "Water Room":
             items["Painkiller"] = CHEAP_ITEMS["Painkiller"];
-            resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
+            resultHTML += "<p>A white synthetic case with a green cross lies splayed out across the middle of the passage. You know better than to get your hopes up about such old equipment, but it is still worth checking. And indeed, a brief once over reveals the contents have been largely plundered - save for a single glass-cylinder, including a hollow metal spike. The illustrated yellow label betrays it to be an old pain remedy, an extremely effective one.</p>"
             break;
         case "Sundered Pit":
             items["Synthetic Cloak"] = CHEAP_ITEMS["Synthetic Cloak"];
-            resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
+            resultHTML += "<p>A yellow flag-like marking catches your eye in the passage. As you approach, it becomes apparent that the flag is in fact an old yellow cloak. It is made of two layers, and includes a plastic tube which allows inflating the apparel in order to float. You carefully slide it off the flagpole, improvised out of a wet branch.</p>"
             break;
         case "Lizard Lair":
             items["Wire Coil"] = CHEAP_ITEMS["Wire Coil"];
-            resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
+            resultHTML += "<p>A thin snake-like thing hangs from a crack in the ceiling. Electrical wire, it seems, once used before the Sundering. You give it a tight grip, dig your feet into the floor, and pull. The wire painfully bites into your palms, but eventually something above you comes loose, and the wire falls onto your feet.</p>"
             break;
         case "Canal Room":
             items["Metal Hook"] = CHEAP_ITEMS["Metal Hook"];
-            resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
+            resultHTML += "<p>The passage is locked from your side, barred by an implement, weapon perhaps, with a long, strong handle that ends in a fine, thin hook that makes the scales on your neck itch uncomfortably. It is easy enough to remove and appears to be of scavenger make.</p>"
             break;
         case "Flooded Room":
             items["Hacksaw"] = CHEAP_ITEMS["Hacksaw"];
-            resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
+            resultHTML += "<p>At the end of the flooded room, a metal bar door stands wide open. A chain lies on the floor right under it, and after a short look around you find the tool used to open it: a handle with a metal extension that doubles back, and features a long row of small teeth useful for cutting.</p>"
             break;
         case "Collapsed Tunnel":
             items["Welder Fluid"] = CHEAP_ITEMS["Welder Fluid"];
-            resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
+            resultHTML += "<p>After tumbling down from the vents and falling on the stone floor under you an intense pain spreads throughout your back. As you roll over a bump on the floor tumbles away with a metallic clank. Once the pain eases you seek it out, a heavy metal cylinder that tapers at either side. Its weight implies it is full of liquid: most likely a dangerous one, given the security of the container.</p>"
             break;
         case "Metal Bars":
             items["Toolkit"] = CHEAP_ITEMS["Toolkit"];
-            resultHTML += "<p>RESULT</p>" // TODO: Insert Itty's item found text.
+            resultHTML += "<p>As you maneuver through the rubble that litters the passage, your attention is brought to a metal crunch coming from under the rocks underneath your feet. After a brief digging, you retrieve a heavy and ungainly metal box, colour long gone and rust set in. Inside are a plentiful variety of tools.</p>"
             break;
         default:
             throw "No reward for scene " + scene.id + "!";
