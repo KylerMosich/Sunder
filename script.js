@@ -297,10 +297,14 @@ function toggleTrade(flipped) {
         interface = document.getElementById("Trade");
     }
 
-    // Get dropdowns.
+    // Get dropdowns and remove existing options.
     let quality = interface.querySelector("#QualityItem");
     let cheap1 = interface.querySelector("#CheapItem1");
     let cheap2 = interface.querySelector("#CheapItem2");
+
+    quality.innerHTML = "<option selected disabled hidden></option>";
+    cheap1.innerHTML = "<option selected disabled hidden></option>";
+    cheap2.innerHTML = "<option selected disabled hidden></option>";
 
     // Populate dropdowns with correct items.
     if (flipped) {
