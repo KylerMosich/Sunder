@@ -76,8 +76,10 @@ function printScene(sceneId, includeItems) {
     // Embed inventory if included or its override.
     if (includeItems) {
         embedInventory();
-    } else {
+    } else if (document.getElementById(sceneId).querySelector(".override") !== null) {
         embedInventoryOverride(document.getElementById(sceneId).querySelector(".override").innerHTML);
+    } else {
+        document.getElementById("inventory").hidden = true;
     }
     updateHeader();
 }
@@ -231,13 +233,15 @@ function selectScene() {
     let showItems = false;
 
     // Select fixed rooms where they belong, or select and remove random room from pool.
-    if (timeRemaining <= 0) {
+    if (timeRemaining < 0) {
         selection = "Death";
     } else if (roomsVisited === 2) {
         selection = "Withered Garden";
     } else if (roomsVisited === 5) {
         wildPatch();
         return;
+    } else if (timeRemaining === 0) {
+        selection = "Death";
     } else {
         let rand = Math.floor(Math.random() * roomPool.length);
         selection = roomPool.splice(rand, 1)[0].id;
